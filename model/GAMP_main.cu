@@ -41,6 +41,7 @@ int main(int argc, char** argv) {
 	myComplex* recSym;//= (myComplex*)malloc(sizeof(myComplex));
 	
     readFileComplex("data//A.txt",&Channel,&ChannelS1,&ChannelS2);
+    //readFileComplex("data/A.txt",&Channel,&ChannelS1,&ChannelS2);
 	readFileComplex("data/Xdata.txt",&sentData,&sentDataS1,&sentDataS2);
 	readFileComplex("data/Xpilot.txt",&sentPilot,&sentPilotS1,&sentPilotS2);
 	readFileComplex("data/y.txt",&recSym,&recSymS1,&recSymS2);
