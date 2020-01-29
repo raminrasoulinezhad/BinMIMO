@@ -264,22 +264,28 @@ void estimZ(myComplex Y, myComplex Phat, float Pvar, myComplex* Zhat, float* Zva
 		
 	const float mean = 0.0;
 	const float var = 1.0;
-	
+	const float pi = 3.1415;
+
 	float PMonesY_R = mySign((Y.r) - 0.1);
 	float PMonesY_I = mySign((Y.i) - 0.1);	
 	
 	float VarN = 0.5*var ;
 	Pvar = 0.5*Pvar;
 		
-	float C_R = PMonesY_R .* ((Phat.r - mean) ./ sqrt( Pvar + VarN ));
-	float C_I = PMonesY_I .* ((Phat.i - mean) ./ sqrt( Pvar + VarN ));
+	//float C_R = PMonesY_R .* ((Phat.r - mean) ./ sqrt( Pvar + VarN ));
+	//float C_I = PMonesY_I .* ((Phat.i - mean) ./ sqrt( Pvar + VarN ));
+	float C_R = PMonesY_R * ((Phat.r - mean) / sqrt( Pvar + VarN ));
+	float C_I = PMonesY_I * ((Phat.i - mean) / sqrt( Pvar + VarN ));
+
 
 	float ratio_R = (2.0/sqrt(2.0*pi)) * (pow(erfcx(-C_R / sqrt(2.0)),(-1)));
 	float ratio_I = (2.0/sqrt(2.0*pi)) * (pow(erfcx(-C_I / sqrt(2.0)),(-1)));
 	
 	
-	float Zhat_R = Phat.r + PMonesY_R * ((Pvar ./ sqrt(Pvar + VarN)) * ratio_R);
-	float Zhat_I = Phat.i + PMonesY_I * ((Pvar ./ sqrt(Pvar + VarN)) * ratio_I);
+	//float Zhat_R = Phat.r + PMonesY_R * ((Pvar ./ sqrt(Pvar + VarN)) * ratio_R);
+	//float Zhat_I = Phat.i + PMonesY_I * ((Pvar ./ sqrt(Pvar + VarN)) * ratio_I);
+	float Zhat_R = Phat.r + PMonesY_R * ((Pvar / sqrt(Pvar + VarN)) * ratio_R);
+	float Zhat_I = Phat.i + PMonesY_I * ((Pvar / sqrt(Pvar + VarN)) * ratio_I);
 	*Zhat = myComplex(Zhat_R, Zhat_I); 
 	
 	float Zvar_R = Pvar - (( pow(Pvar,2) / (Pvar + VarN)) * ratio_R) * (C_R + ratio_R);
