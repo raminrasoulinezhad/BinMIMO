@@ -4,9 +4,24 @@ Main files are:
 	GAMP_gpuFuncs.cu
 	GAMP_main.cu
 
+
+## Ramin:
+	cd model
+	make all
+	make run
+	
+
+## Bahari:
 To run this code you need to run 
 
-	nvcc -o GAMP_main.out -c GAMP_main.cu
+	export PATH=/usr/local/cuda/bin:/usr/local/cuda/NsightCompute-1.0${PATH:+:${PATH}}
 	
+	nvcc -o GAMP_main.out -c GAMP_main.cu
+	chmod +x ./GAMP_main.out 	
+	./GAMP_main.out 
+
+Result:
+
+	-bash: ./GAMP_main.out: cannot execute binary file: Exec format error
 
 	
