@@ -26,7 +26,7 @@ guppy:
 
 	Device Name: GeForce GTX 1080 Ti
 	shared mem size: 65536
-	N=200 K=64 T=514	 CPU=209.731 ms GPU=69.254 ms GPU-kernel=1.75251 ms mse=29884977152.000000
+	N=200 K=64 T=514	 CPU=191.369 ms GPU=43.056 ms GPU-kernel=1.8847 ms mse=29884977152.000000
 	N=200 K=64 T=514	 CPU=191.497 ms GPU=46.695 ms GPU-kernel=1.88506 ms mse=29884977152.000000
 
 Ramin Thinkpad:
