@@ -20,7 +20,8 @@ DrFish:
 
 	Device Name: GeForce RTX 2080 Ti
 	shared mem size: 65536
-	N=200 K=64 T=514   CPU=224.522 ms GPU=235.301 ms GPU-kernel=1.77885 ms mse=31134828544.000000
+	N=200 K=64 T=514   	CPU=224.522 ms GPU=235.301 ms GPU-kernel=1.77885 ms mse=31134828544.000000
+	N=200 K=64 T=514	CPU=224.939 ms GPU=226.591 ms GPU-kernel=1.78445 ms mse=29884977152.000000
 
 guppy:
 
