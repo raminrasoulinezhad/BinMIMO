@@ -1,8 +1,20 @@
+Main files are:
+
+	GAMP_cpuFuncs.cu
+	GAMP_gpuFuncs.cu
+	GAMP_main.cu
+
+## Ramin:
+	cd model
+	make all
+	
+## Results
+
 ProfPhillet:
 
 	Device Name: Tesla M40
 	shared mem size: 65536
-	N=200 K=64 T=514   CPU=411.621 ms GPU=189.899 ms GPU-kernel=2.60611 ms mse=29884977152.000000
+	N=200 K=64 T=514	 CPU=288.897 ms GPU=63.923 ms GPU-kernel=3.08845 ms mse=29884977152.000000
 
 DrFish:
 
