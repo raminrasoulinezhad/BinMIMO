@@ -10,12 +10,12 @@ def get_args():
 	parser.add_argument('--device', type=str, default="cpu", help='cpu or cuda:0')
 
 	parser.add_argument('--exp_try_max', type=int, default=20)
-	parser.add_argument('--iter_try_max', type=int, default=33)
+	parser.add_argument('--iter_try_max', type=int, default=30)
 	
 	parser.add_argument('--N', type=int, default=100)
 	parser.add_argument('--Td', type=int, default=450)
 	parser.add_argument('--Tt', type=int, default=50)
-	parser.add_argument('--K', type=int, default=200)
+	parser.add_argument('--K', type=int, default=50)
 
 	parser.add_argument('--eps', type=float, default=0.001)
 	parser.add_argument('--SNR', type=float, default=10)
@@ -133,21 +133,44 @@ if __name__ == "__main__":
 	
 		for iter_try in range(args.iter_try_max):
 			
-			#print(H_hat.shape)
 			# line 1
 			temp = H_hat.abs().pow(2).mm( torch.cat((V_t, V_d), 1) ) 
 			temp += V_h.mm( torch.cat((X_t, X_d), 1).abs().pow(2) )
 			
 			V_p = temp + V_h.mm( torch.cat((V_t, V_d), 1) ) 
-			#print(V_p.shape)
+			
 			# line 2
 
 			P_hat = S_hat * temp 
 			P_hat = matmul_complex( H_hat, torch.cat((X_t, X_d), 1) ) - P_hat
 
+			# line 3 and 4
 			Zhat, Zvar = estim(Z, P_hat, V_p)
 
+			# line 5 and 6
+			V_s = (1-Zvar/V_p)/V_p
+			S_hat = (Z - P_hat)/V_p
+
+			# line 7
+			V_r = 1 / (torch.transpose(H_hat, 0, 1).abs().pow(2).mm(V_s))
+
+			# line 8
+			R_hat = torch.cat((X_t, X_d), 1) * (1 - V_r * torch.transpose(V_h, 0, 1).mm(V_s) ) + V_r * matmul_complex(H_hat.conj().transpose(0,1), S_hat)
+
+
+#			# line 9
+#			V_q = 1 / (V_s.mm(torch.cat((X_t, X_d), 1).transpose(0,1).pow(2)))
+#
+#			# line 10
+#			Q_hat = H_hat * (1 - V_q * V_s.mm(torch.transpose(V_x, 0, 1))) + V_q * (S_hat.mm(   torch.cat((X_t, X_d), 1).conj().transpose(0, 1)  ))
+#
+#			# line 11-12
+#			Zhat, Zvar = estim(torch.cat((X_t, X_d), 1), R_hat[:,Tt:], V_r[Tt:])
+#			# line 13-14
+#			Zhat, Zvar = estim(H_hat, Q_hat, V_q)
+
 			#exit()
+			#print(V_p.shape)
 			# Forward pass: compute predicted y
 			#h = x.mm(w1)
 			#h_relu = h.clamp(min=0)
