@@ -12,10 +12,10 @@ def get_args():
 	parser.add_argument('--exp_try_max', type=int, default=20)
 	parser.add_argument('--iter_try_max', type=int, default=30)
 	
-	parser.add_argument('--N', type=int, default=100)
+	parser.add_argument('--N', type=int, default=200)
 	parser.add_argument('--Td', type=int, default=450)
 	parser.add_argument('--Tt', type=int, default=50)
-	parser.add_argument('--K', type=int, default=50)
+	parser.add_argument('--K', type=int, default=64)
 
 	parser.add_argument('--eps', type=float, default=0.001)
 	parser.add_argument('--SNR', type=float, default=10)
